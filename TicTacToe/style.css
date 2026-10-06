@@ -1,0 +1,154 @@
+:root {
+  --bg: #0f172a;
+  --cell: #1e293b;
+  --cell-hover: #273449;
+  --x: #22d3ee;
+  --o: #f472b6;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  text-align: center;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 1rem;
+}
+h1 {
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  letter-spacing: 0.04em;
+}
+#status {
+  min-height: 1.6em;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+.score {
+  display: flex;
+  gap: 1.5rem;
+  color: var(--muted);
+}
+.score b {
+  margin-left: 0.3rem;
+  color: var(--text);
+}
+.score .x {
+  color: var(--x);
+}
+.score .o {
+  color: var(--o);
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.game {
+  --size: min(90vw, 58vh, 440px);
+  height: var(--size);
+  width: var(--size);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+}
+.box {
+  border: 0;
+  border-radius: 12px;
+  font-size: calc(var(--size) / 3 * 0.55);
+  font-weight: 500;
+  color: var(--text);
+  background-color: var(--cell);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.box:hover:not(:disabled) {
+  background-color: var(--cell-hover);
+}
+.box:disabled {
+  cursor: default;
+}
+.box.x {
+  color: var(--x);
+  text-shadow: 0 0 14px var(--x);
+}
+.box.o {
+  color: var(--o);
+  text-shadow: 0 0 14px var(--o);
+}
+.box.pop {
+  animation: pop 0.18s ease-out;
+}
+.box.win {
+  background-color: #334155;
+  box-shadow: 0 0 0 2px currentColor;
+}
+.box:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 2px;
+}
+@keyframes pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .box.pop {
+    animation: none;
+  }
+}
+#reset,
+#new {
+  padding: 0.8rem 1.8rem;
+  border: 0;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: var(--x);
+  color: var(--bg);
+  cursor: pointer;
+}
+#reset:hover,
+#new:hover {
+  filter: brightness(1.1);
+}
+.msg-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(15, 23, 42, 0.88);
+}
+.msg-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+#msg {
+  color: #ffffc7;
+  font-size: clamp(1.8rem, 7vw, 3rem);
+}
+.hide {
+  display: none;
+}
